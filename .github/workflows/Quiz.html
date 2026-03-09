@@ -1,43 +1,1303 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+<!DOCTYPE html>
+<html lang="en">
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algebraic Applications & Proportional Reasoning Quiz</title>
+    <meta name="description"
+        content="Test your knowledge of algebraic applications and proportional reasoning with this interactive quiz.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+        :root {
+            --glass-blur: 50px;
+            --glass-sat: 180%;
+            --glass-bright: 0.95;
+            --pill: 100px;
+            --bubble: 28px;
+            --card-r: 36px;
+            --t: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+        html {
+            scroll-behavior: smooth;
+        }
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        /* ===== VIVID BG (deep/dark like a real wallpaper) ===== */
+        .bg-vivid {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(220, 40, 80, 0.7) 0%, transparent 35%),
+                radial-gradient(circle at 85% 15%, rgba(140, 60, 220, 0.6) 0%, transparent 30%),
+                radial-gradient(circle at 50% 65%, rgba(10, 100, 200, 0.7) 0%, transparent 40%),
+                radial-gradient(circle at 75% 80%, rgba(200, 90, 20, 0.5) 0%, transparent 30%),
+                radial-gradient(circle at 25% 80%, rgba(10, 140, 90, 0.5) 0%, transparent 25%),
+                radial-gradient(circle at 60% 15%, rgba(180, 30, 60, 0.5) 0%, transparent 25%),
+                radial-gradient(circle at 40% 45%, rgba(30, 80, 200, 0.6) 0%, transparent 35%);
+            background-color: #0a1628;
+            animation: bgShift 25s ease-in-out infinite alternate;
+        }
+
+        .bg-vivid::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 70%, rgba(200, 160, 30, 0.25) 0%, transparent 30%),
+                radial-gradient(circle at 70% 30%, rgba(160, 40, 200, 0.2) 0%, transparent 25%);
+            animation: bgShift2 18s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes bgShift {
+            0% {
+                filter: hue-rotate(0deg)
+            }
+
+            50% {
+                filter: hue-rotate(15deg)
+            }
+
+            100% {
+                filter: hue-rotate(-10deg)
+            }
+        }
+
+        @keyframes bgShift2 {
+            0% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            100% {
+                opacity: .7;
+                transform: scale(1.1)
+            }
+        }
+
+        /* ===== LIQUID GLASS ===== */
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.08);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat)) brightness(var(--glass-bright));
+            backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat)) brightness(var(--glass-bright));
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2), inset 0 .5px 0 rgba(255, 255, 255, 0.35), inset 0 -.5px 0 rgba(255, 255, 255, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .liquid-glass::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 40%, transparent 100%);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .liquid-glass::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, transparent 40%, transparent 60%, rgba(255, 255, 255, 0.15) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            padding: 1.5px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.15);
+            -webkit-backdrop-filter: blur(20px) saturate(150%) brightness(1.1);
+            backdrop-filter: blur(20px) saturate(150%) brightness(1.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06), inset 0 .5px 0 rgba(255, 255, 255, 0.45);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            text-align: center;
+            padding: 2.5rem 1.5rem 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: clamp(1.2rem, 3.2vw, 1.9rem);
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+            margin-bottom: 0.3rem;
+        }
+
+        header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.88rem;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===== PROGRESS ===== */
+        .progress-container {
+            max-width: 580px;
+            margin: 0 auto 1rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: .4rem;
+            font-size: .75rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .progress-bar-track {
+            height: 8px;
+            border-radius: var(--pill);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: var(--pill);
+            transition: width .5s cubic-bezier(.22, 1, .36, 1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        /* ===== MAIN ===== */
+        main {
+            flex: 1;
+            max-width: 580px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== SCORE BADGE (top-right in header) ===== */
+        .score-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .3rem .8rem;
+            border-radius: var(--pill);
+            margin-top: .5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            font-size: .8rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ===== QUIZ CARD ===== */
+        .quiz-card {
+            border-radius: var(--card-r);
+            padding: 2rem 1.6rem;
+            animation: glassReveal .55s cubic-bezier(.22, 1, .36, 1) both;
+        }
+
+        @keyframes glassReveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(.97);
+                filter: blur(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        .question-number {
+            display: inline-block;
+            font-size: .68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: .8rem;
+            padding: .25rem .75rem;
+            border-radius: var(--pill);
+            position: relative;
+            z-index: 3;
+        }
+
+        .question-text {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.55;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 3;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ===== OPTIONS ===== */
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .55rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-item input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            padding: .85rem 1.1rem;
+            border-radius: var(--bubble);
+            background: rgba(255, 255, 255, 0.12);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            backdrop-filter: blur(20px) saturate(160%);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06), inset 0 .5px 0 rgba(255, 255, 255, 0.35);
+            cursor: pointer;
+            transition: all var(--t);
+            font-size: .9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            user-select: none;
+        }
+
+        .option-label:hover:not(.locked) {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.45);
+            transform: scale(1.015);
+        }
+
+        .option-radio-circle {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--t);
+        }
+
+        .option-radio-circle::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+            transform: scale(0);
+            transition: transform var(--spring);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        .option-item input[type="radio"]:checked+.option-label {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 255, 255, 0.1), inset 0 .5px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        .option-item input[type="radio"]:checked+.option-label .option-radio-circle {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .option-item input[type="radio"]:checked+.option-label .option-radio-circle::after {
+            transform: scale(1);
+        }
+
+        .option-letter {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: .8rem;
+            min-width: 14px;
+        }
+
+        .option-item input[type="radio"]:checked+.option-label .option-letter {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Locked states (after check) */
+        .option-label.locked {
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .option-label.correct-highlight {
+            background: rgba(52, 199, 89, 0.35) !important;
+            border-color: rgba(52, 199, 89, 0.6) !important;
+            box-shadow: 0 0 24px rgba(52, 199, 89, 0.2), inset 0 .5px 0 rgba(255, 255, 255, 0.4) !important;
+        }
+
+        .option-label.correct-highlight .option-radio-circle {
+            border-color: #34c759 !important;
+        }
+
+        .option-label.correct-highlight .option-radio-circle::after {
+            background: #34c759 !important;
+            transform: scale(1) !important;
+        }
+
+        .option-label.incorrect-highlight {
+            background: rgba(255, 59, 48, 0.3) !important;
+            border-color: rgba(255, 59, 48, 0.5) !important;
+            box-shadow: 0 0 24px rgba(255, 59, 48, 0.15), inset 0 .5px 0 rgba(255, 255, 255, 0.3) !important;
+        }
+
+        .option-label.incorrect-highlight .option-radio-circle {
+            border-color: #ff3b30 !important;
+        }
+
+        .option-label.incorrect-highlight .option-radio-circle::after {
+            background: #ff3b30 !important;
+            transform: scale(1) !important;
+        }
+
+        /* ===== EXPLANATION BOX ===== */
+        .explanation-box {
+            margin-top: 1.2rem;
+            padding: 1rem 1.2rem;
+            border-radius: var(--bubble);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            animation: slideUp .4s cubic-bezier(.22, 1, .36, 1) both;
+            position: relative;
+            z-index: 3;
+        }
+
+        .explanation-box.correct-exp {
+            border-left: 3px solid #34c759;
+        }
+
+        .explanation-box.incorrect-exp {
+            border-left: 3px solid #ff3b30;
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            font-size: .82rem;
+            font-weight: 700;
+            margin-bottom: .4rem;
+        }
+
+        .explanation-header.correct-text {
+            color: #5afa8e;
+        }
+
+        .explanation-header.incorrect-text {
+            color: #ff7b73;
+        }
+
+        .explanation-body {
+            font-size: .85rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: .6rem;
+            margin-top: 1.4rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .7rem 1.6rem;
+            border: none;
+            border-radius: var(--pill);
+            font-family: inherit;
+            font-size: .88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--t);
+            position: relative;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.3);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            backdrop-filter: blur(20px) saturate(160%);
+            color: rgba(255, 255, 255, 0.95);
+            border: 1.5px solid rgba(255, 255, 255, 0.45);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 .5px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.03);
+        }
+
+        .btn-primary:active {
+            transform: scale(.97);
+        }
+
+        .btn-primary:disabled {
+            opacity: .3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-check {
+            background: rgba(255, 255, 255, 0.35);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            backdrop-filter: blur(20px) saturate(160%);
+            color: rgba(255, 255, 255, 0.95);
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 .5px 0 rgba(255, 255, 255, 0.5);
+            animation: popIn .3s var(--spring) both;
+        }
+
+        .btn-check:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.04);
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(.85);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .btn-icon {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        /* ===== START SCREEN ===== */
+        .start-screen {
+            text-align: center;
+            animation: glassReveal .55s cubic-bezier(.22, 1, .36, 1) both;
+        }
+
+        .start-card {
+            border-radius: var(--card-r);
+            padding: 2.5rem 2rem;
+        }
+
+        .start-icon {
+            font-size: 2.8rem;
+            margin-bottom: .8rem;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+            position: relative;
+            z-index: 3;
+        }
+
+        .start-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: .35rem;
+            position: relative;
+            z-index: 3;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .start-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: .88rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .start-meta {
+            display: flex;
+            justify-content: center;
+            gap: .6rem;
+            margin: 1.4rem 0 1.8rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 3;
+        }
+
+        .meta-pill {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: .78rem;
+            font-weight: 500;
+            padding: .3rem .75rem;
+            border-radius: var(--pill);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* ===== RESULTS ===== */
+        .results-section {
+            text-align: center;
+            animation: glassReveal .55s cubic-bezier(.22, 1, .36, 1) both;
+        }
+
+        .results-card {
+            border-radius: var(--card-r);
+            padding: 2.2rem 1.8rem;
+        }
+
+        .results-emoji {
+            font-size: 3rem;
+            margin-bottom: .6rem;
+            animation: bubblePop .5s var(--spring);
+            position: relative;
+            z-index: 3;
+        }
+
+        @keyframes bubblePop {
+            from {
+                transform: scale(0) rotate(-15deg)
+            }
+
+            60% {
+                transform: scale(1.2) rotate(5deg)
+            }
+
+            to {
+                transform: scale(1) rotate(0)
+            }
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: .25rem;
+            position: relative;
+            z-index: 3;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: .88rem;
+            margin-bottom: 1.6rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .score-ring {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1.6rem;
+            z-index: 3;
+        }
+
+        .score-ring svg {
+            transform: rotate(-90deg);
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
+        }
+
+        .score-ring-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.15);
+            stroke-width: 10;
+        }
+
+        .score-ring-fill {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.85);
+            stroke-width: 10;
+            stroke-linecap: round;
+            stroke-dasharray: 377;
+            stroke-dashoffset: 377;
+            transition: stroke-dashoffset 1.4s cubic-bezier(.22, 1, .36, 1) .3s;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+        }
+
+        .score-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+        }
+
+        .score-label {
+            font-size: .68rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.55);
+            text-transform: uppercase;
+            letter-spacing: .8px;
+        }
+
+        .results-stats {
+            display: flex;
+            justify-content: center;
+            gap: .6rem;
+            margin-bottom: 1.8rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 3;
+        }
+
+        .stat-bubble {
+            text-align: center;
+            padding: .7rem 1.2rem;
+            border-radius: var(--bubble);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            min-width: 85px;
+        }
+
+        .stat-number {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .stat-number.correct-stat {
+            color: #5afa8e;
+            text-shadow: 0 0 8px rgba(90, 250, 142, 0.3);
+        }
+
+        .stat-number.incorrect-stat {
+            color: #ff7b73;
+            text-shadow: 0 0 8px rgba(255, 123, 115, 0.3);
+        }
+
+        .stat-label {
+            font-size: .65rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .btn-restart {
+            margin-top: 1rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* ===== PARTY POPPER CANVAS ===== */
+        #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: .72rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            header {
+                padding: 2rem 1rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.2rem;
+            }
+
+            .quiz-card,
+            .start-card,
+            .results-card {
+                padding: 1.5rem 1.2rem;
+                border-radius: var(--bubble);
+            }
+
+            .question-text {
+                font-size: .98rem;
+            }
+
+            .option-label {
+                padding: .75rem .9rem;
+                font-size: .85rem;
+                border-radius: 22px;
+            }
+
+            .btn {
+                padding: .65rem 1.3rem;
+                font-size: .85rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-row {
+                flex-direction: column-reverse;
+            }
+
+            main {
+                padding: 0 1rem 2rem;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-out {
+            animation: fadeOut .3s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-12px) scale(.97);
+                filter: blur(6px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-vivid"></div>
+    <canvas id="confettiCanvas"></canvas>
+
+    <header>
+        <h1>Algebraic Applications & Proportional Reasoning Quiz</h1>
+        <p>Test your mathematical problem-solving skills</p>
+        <div class="score-badge hidden" id="scoreBadge">
+            <span>🎯</span>
+            <span id="runningScore">0 / 0</span>
+        </div>
+    </header>
+
+    <div class="progress-container hidden" id="progressContainer">
+        <div class="progress-info">
+            <span id="progressText">Question 1 of 15</span>
+        </div>
+        <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <main>
+        <!-- START SCREEN -->
+        <div class="start-screen" id="startScreen">
+            <div class="start-card liquid-glass">
+                <div class="start-icon">📐</div>
+                <h2 class="start-title">Ready to Begin?</h2>
+                <p class="start-desc">15 questions on algebra & proportional reasoning. Get instant feedback on each
+                    answer!</p>
+                <div class="start-meta">
+                    <span class="meta-pill">📝 15 Questions</span>
+                    <span class="meta-pill">⏱️ No Time Limit</span>
+                    <span class="meta-pill">✅ Instant Feedback</span>
+                </div>
+                <button class="btn btn-primary" onclick="startQuiz()">Start Quiz <span
+                        class="btn-icon">→</span></button>
+            </div>
+        </div>
+
+        <!-- QUIZ AREA -->
+        <div class="hidden" id="quizArea">
+            <div class="quiz-card liquid-glass" id="quizCard">
+                <div class="question-number inner-glass" id="questionNumber">Question 1</div>
+                <p class="question-text" id="questionText"></p>
+                <ul class="options-list" id="optionsList"></ul>
+                <div id="explanationArea"></div>
+                <div class="btn-row" id="btnRow">
+                    <button class="btn btn-check hidden" id="checkBtn" onclick="checkAnswer()">
+                        Check <span class="btn-icon">✓</span>
+                    </button>
+                    <button class="btn btn-primary hidden" id="nextBtn" onclick="nextQuestion()">
+                        Next <span class="btn-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="results-section hidden" id="resultsArea">
+            <div class="results-card liquid-glass">
+                <div class="results-emoji" id="resultsEmoji">🏆</div>
+                <h2 class="results-title" id="resultsTitle">Quiz Complete!</h2>
+                <p class="results-subtitle" id="resultsSubtitle"></p>
+                <div class="score-ring">
+                    <svg width="140" height="140" viewBox="0 0 140 140">
+                        <circle class="score-ring-bg" cx="70" cy="70" r="60" />
+                        <circle class="score-ring-fill" id="scoreRingFill" cx="70" cy="70" r="60" />
+                    </svg>
+                    <div class="score-text">
+                        <div class="score-value" id="scoreValue">0%</div>
+                        <div class="score-label">Score</div>
+                    </div>
+                </div>
+                <div class="results-stats">
+                    <div class="stat-bubble">
+                        <div class="stat-number correct-stat" id="correctCount">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-bubble">
+                        <div class="stat-number incorrect-stat" id="incorrectCount">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-bubble">
+                        <div class="stat-number" id="totalCount" style="color:rgba(255,255,255,.9)">0</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-restart" onclick="restartQuiz()">🔄 Retake Quiz</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>&copy; 2026 Algebraic Applications &amp; Proportional Reasoning Quiz</footer>
+
+    <script>
+        // ===== QUIZ DATA (15 questions with explanations) =====
+        const quizData = [
+            {
+                question: "If 3x + 7 = 22, what is the value of x?",
+                options: ["3", "5", "7", "15"],
+                answer: 1,
+                explanation: "Subtract 7 from both sides: 3x = 15. Divide both sides by 3: x = 5."
+            },
+            {
+                question: "A recipe requires 2 cups of flour for every 3 cups of sugar. If you use 10 cups of sugar, how many cups of flour do you need?",
+                options: ["5 cups", "6 cups", "6⅔ cups", "7 cups"],
+                answer: 2,
+                explanation: "Set up the proportion: 2/3 = x/10. Cross multiply: 3x = 20, so x = 20/3 = 6⅔ cups."
+            },
+            {
+                question: "A car travels 180 miles in 3 hours. At the same rate, how far will it travel in 7 hours?",
+                options: ["360 miles", "400 miles", "420 miles", "540 miles"],
+                answer: 2,
+                explanation: "Rate = 180 ÷ 3 = 60 mph. Distance in 7 hours = 60 × 7 = 420 miles."
+            },
+            {
+                question: "Solve for y: 2(y − 4) = 3y + 2",
+                options: ["y = −10", "y = −6", "y = 6", "y = 10"],
+                answer: 0,
+                explanation: "Expand: 2y − 8 = 3y + 2. Subtract 2y: −8 = y + 2. Subtract 2: y = −10."
+            },
+            {
+                question: "If the ratio of boys to girls in a class is 5:3 and there are 40 students total, how many girls are there?",
+                options: ["10", "15", "20", "25"],
+                answer: 1,
+                explanation: "Total ratio parts = 5 + 3 = 8. Girls = (3/8) × 40 = 15."
+            },
+            {
+                question: "A map uses a scale of 1 inch = 50 miles. If two cities are 3.5 inches apart on the map, what is the actual distance?",
+                options: ["150 miles", "175 miles", "200 miles", "250 miles"],
+                answer: 1,
+                explanation: "Distance = 3.5 × 50 = 175 miles."
+            },
+            {
+                question: "Simplify: 4(2x − 3) + 5x",
+                options: ["13x − 12", "13x − 3", "8x − 12", "13x + 12"],
+                answer: 0,
+                explanation: "Distribute: 8x − 12 + 5x = 13x − 12."
+            },
+            {
+                question: "If 8 workers can complete a job in 6 days, how many days will 12 workers take to complete the same job?",
+                options: ["3 days", "4 days", "5 days", "9 days"],
+                answer: 1,
+                explanation: "Total work = 8 × 6 = 48 worker-days. With 12 workers: 48 ÷ 12 = 4 days. This is inverse proportion."
+            },
+            {
+                question: "The cost of 5 identical notebooks is $12.50. What is the cost of 8 such notebooks?",
+                options: ["$17.50", "$18.00", "$20.00", "$22.50"],
+                answer: 2,
+                explanation: "Unit cost = $12.50 ÷ 5 = $2.50. Cost of 8 = $2.50 × 8 = $20.00."
+            },
+            {
+                question: "Which of the following represents a proportional relationship?",
+                options: ["y = 3x + 1", "y = 7x", "y = x² + 2", "y = 5/x"],
+                answer: 1,
+                explanation: "A proportional relationship is of the form y = kx (passes through origin). Only y = 7x fits this pattern."
+            },
+            {
+                question: "If x/4 = 12/16, what is the value of x?",
+                options: ["2", "3", "4", "6"],
+                answer: 1,
+                explanation: "Cross multiply: 16x = 48. Divide by 16: x = 3."
+            },
+            {
+                question: "A store offers 20% off on all items. If a shirt originally costs $45, what is the sale price?",
+                options: ["$9", "$25", "$36", "$40"],
+                answer: 2,
+                explanation: "Discount = 20% of $45 = $9. Sale price = $45 − $9 = $36."
+            },
+            {
+                question: "Solve: 5(x + 2) − 3 = 2(x − 1) + 6",
+                options: ["x = −3", "x = −1", "x = 1", "x = 3"],
+                answer: 1,
+                explanation: "Expand: 5x + 10 − 3 = 2x − 2 + 6 → 5x + 7 = 2x + 4. Subtract 2x: 3x + 7 = 4. Subtract 7: 3x = −3. So x = −1."
+            },
+            {
+                question: "Two numbers are in the ratio 4:7. If their sum is 55, what is the larger number?",
+                options: ["20", "28", "35", "45"],
+                answer: 2,
+                explanation: "Total parts = 4 + 7 = 11. Larger number = (7/11) × 55 = 35."
+            },
+            {
+                question: "If a train travels 300 km in 4 hours, what is its speed in m/s?",
+                options: ["15.5 m/s", "20.83 m/s", "25 m/s", "75 m/s"],
+                answer: 1,
+                explanation: "Speed = 300 km / 4 hr = 75 km/h. Convert: 75 × (1000/3600) = 75 × 5/18 ≈ 20.83 m/s."
+            }
+        ];
+
+        // ===== STATE =====
+        let currentQuestion = 0;
+        let correctTotal = 0;
+        let answeredTotal = 0;
+        let selectedOption = null;
+        let isChecked = false;
+
+        const startScreen = document.getElementById('startScreen');
+        const quizArea = document.getElementById('quizArea');
+        const resultsArea = document.getElementById('resultsArea');
+        const progressContainer = document.getElementById('progressContainer');
+        const scoreBadge = document.getElementById('scoreBadge');
+
+        function startQuiz() {
+            startScreen.classList.add('fade-out');
+            setTimeout(() => {
+                startScreen.classList.add('hidden');
+                startScreen.classList.remove('fade-out');
+                quizArea.classList.remove('hidden');
+                progressContainer.classList.remove('hidden');
+                scoreBadge.classList.remove('hidden');
+                loadQuestion(0);
+            }, 300);
+        }
+
+        function loadQuestion(index) {
+            const card = document.getElementById('quizCard');
+            card.style.animation = 'none'; card.offsetHeight; card.style.animation = '';
+
+            selectedOption = null;
+            isChecked = false;
+
+            const q = quizData[index];
+            document.getElementById('questionNumber').textContent = `Question ${index + 1}`;
+            document.getElementById('questionText').textContent = q.question;
+
+            const letters = ['A', 'B', 'C', 'D'];
+            document.getElementById('optionsList').innerHTML = q.options.map((opt, i) => `
+                <li class="option-item">
+                    <input type="radio" name="q${index}" id="q${index}_o${i}" value="${i}" onchange="selectOpt(${i})">
+                    <label class="option-label" for="q${index}_o${i}" id="label_${i}">
+                        <span class="option-radio-circle"></span>
+                        <span class="option-letter">${letters[i]}</span>
+                        <span>${opt}</span>
+                    </label>
+                </li>
+            `).join('');
+
+            document.getElementById('explanationArea').innerHTML = '';
+            document.getElementById('checkBtn').classList.add('hidden');
+            document.getElementById('nextBtn').classList.add('hidden');
+
+            updateProgress();
+            updateScore();
+        }
+
+        function selectOpt(i) {
+            if (isChecked) return;
+            selectedOption = i;
+            document.getElementById('checkBtn').classList.remove('hidden');
+            document.getElementById('nextBtn').classList.add('hidden');
+        }
+
+        function checkAnswer() {
+            if (selectedOption === null || isChecked) return;
+            isChecked = true;
+            answeredTotal++;
+
+            const q = quizData[currentQuestion];
+            const isCorrect = selectedOption === q.answer;
+            if (isCorrect) correctTotal++;
+
+            // Lock all options
+            document.querySelectorAll('.option-label').forEach(lbl => lbl.classList.add('locked'));
+
+            // Highlight
+            if (isCorrect) {
+                document.getElementById(`label_${selectedOption}`).classList.add('correct-highlight');
+                launchConfetti();
+            } else {
+                document.getElementById(`label_${selectedOption}`).classList.add('incorrect-highlight');
+                document.getElementById(`label_${q.answer}`).classList.add('correct-highlight');
+            }
+
+            // Show explanation
+            const letters = ['A', 'B', 'C', 'D'];
+            const expClass = isCorrect ? 'correct-exp' : 'incorrect-exp';
+            const headerClass = isCorrect ? 'correct-text' : 'incorrect-text';
+            const headerIcon = isCorrect ? '🎉' : '❌';
+            const headerText = isCorrect ? 'Correct!' : `Incorrect — The answer is ${letters[q.answer]}. ${q.options[q.answer]}`;
+
+            document.getElementById('explanationArea').innerHTML = `
+                <div class="explanation-box ${expClass}">
+                    <div class="explanation-header ${headerClass}">${headerIcon} ${headerText}</div>
+                    <div class="explanation-body">${q.explanation}</div>
+                </div>
+            `;
+
+            // Show next / finish
+            document.getElementById('checkBtn').classList.add('hidden');
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.classList.remove('hidden');
+            if (currentQuestion === quizData.length - 1) {
+                nextBtn.innerHTML = 'Finish Quiz <span class="btn-icon">🏁</span>';
+            } else {
+                nextBtn.innerHTML = 'Next Question <span class="btn-icon">→</span>';
+            }
+
+            updateScore();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion >= quizData.length - 1) {
+                showResults();
+                return;
+            }
+            currentQuestion++;
+            loadQuestion(currentQuestion);
+        }
+
+        function updateProgress() {
+            const total = quizData.length;
+            document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${total}`;
+            document.getElementById('progressPercent').textContent = `${Math.round(((currentQuestion + 1) / total) * 100)}%`;
+            document.getElementById('progressFill').style.width = `${((currentQuestion + 1) / total) * 100}%`;
+        }
+
+        function updateScore() {
+            document.getElementById('runningScore').textContent = `${correctTotal} / ${answeredTotal}`;
+        }
+
+        function showResults() {
+            const total = quizData.length;
+            const incorrect = total - correctTotal;
+            const pct = Math.round((correctTotal / total) * 100);
+
+            quizArea.classList.add('fade-out');
+            progressContainer.classList.add('fade-out');
+
+            setTimeout(() => {
+                quizArea.classList.add('hidden');
+                progressContainer.classList.add('hidden');
+                quizArea.classList.remove('fade-out');
+                progressContainer.classList.remove('fade-out');
+
+                document.getElementById('correctCount').textContent = correctTotal;
+                document.getElementById('incorrectCount').textContent = incorrect;
+                document.getElementById('totalCount').textContent = total;
+                document.getElementById('scoreValue').textContent = `${pct}%`;
+
+                let emoji, title, subtitle;
+                if (pct === 100) { emoji = '🏆'; title = 'Perfect Score!'; subtitle = 'Outstanding! You nailed every question!'; }
+                else if (pct >= 80) { emoji = '🌟'; title = 'Excellent Work!'; subtitle = 'Great job! Strong grasp of the material.'; }
+                else if (pct >= 60) { emoji = '👍'; title = 'Good Effort!'; subtitle = 'Solid performance! Keep practicing!'; }
+                else if (pct >= 40) { emoji = '📚'; title = 'Keep Practicing!'; subtitle = 'You\'re getting there. Review and try again.'; }
+                else { emoji = '💪'; title = 'Don\'t Give Up!'; subtitle = 'Every expert was once a beginner!'; }
+
+                document.getElementById('resultsEmoji').textContent = emoji;
+                document.getElementById('resultsTitle').textContent = title;
+                document.getElementById('resultsSubtitle').textContent = subtitle;
+
+                const circumference = 2 * Math.PI * 60;
+                const offset = circumference - (pct / 100) * circumference;
+                const ring = document.getElementById('scoreRingFill');
+                ring.style.strokeDasharray = circumference;
+                ring.style.strokeDashoffset = circumference;
+
+                resultsArea.classList.remove('hidden');
+                scoreBadge.classList.add('hidden');
+
+                requestAnimationFrame(() => { requestAnimationFrame(() => { ring.style.strokeDashoffset = offset; }); });
+
+                if (pct >= 80) launchConfetti();
+            }, 350);
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0; correctTotal = 0; answeredTotal = 0; selectedOption = null; isChecked = false;
+            resultsArea.classList.add('fade-out');
+            setTimeout(() => {
+                resultsArea.classList.add('hidden');
+                resultsArea.classList.remove('fade-out');
+                startScreen.classList.remove('hidden');
+            }, 300);
+        }
+
+        // ===== CONFETTI / PARTY POPPER =====
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        let confettiPieces = [];
+        let confettiActive = false;
+
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function launchConfetti() {
+            confettiPieces = [];
+            const colors = ['#ff6b9d', '#c084fc', '#0ea5e9', '#f97316', '#10b981', '#f43f5e', '#fbbf24', '#34d399', '#818cf8', '#fb923c'];
+            for (let i = 0; i < 120; i++) {
+                confettiPieces.push({
+                    x: Math.random() * canvas.width,
+                    y: canvas.height + 20,
+                    vx: (Math.random() - 0.5) * 12,
+                    vy: -(Math.random() * 18 + 8),
+                    w: Math.random() * 10 + 4,
+                    h: Math.random() * 6 + 3,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    rotSpeed: (Math.random() - 0.5) * 12,
+                    gravity: 0.25 + Math.random() * 0.15,
+                    opacity: 1,
+                    shape: Math.random() > 0.5 ? 'rect' : 'circle'
+                });
+            }
+            if (!confettiActive) {
+                confettiActive = true;
+                animateConfetti();
+            }
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let alive = false;
+
+            confettiPieces.forEach(p => {
+                p.vy += p.gravity;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.rotSpeed;
+                p.vx *= 0.99;
+
+                if (p.y > canvas.height + 50) {
+                    p.opacity -= 0.02;
+                }
+
+                if (p.opacity > 0) {
+                    alive = true;
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.globalAlpha = Math.max(0, p.opacity);
+                    ctx.fillStyle = p.color;
+
+                    if (p.shape === 'rect') {
+                        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+                }
+            });
+
+            if (alive) {
+                requestAnimationFrame(animateConfetti);
+            } else {
+                confettiActive = false;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+    </script>
+</body>
+
+</html>
